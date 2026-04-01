@@ -1,24 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Amplify from 'aws-amplify';
-import "@aws-amplify/ui-react/styles.css";
-import {AmplifyProvider} from "@aws-amplify/ui-react";
-import awsconfig from './aws-exports';
-Amplify.configure(awsconfig);
+import { Amplify } from 'aws-amplify';
+import '@aws-amplify/ui-react/styles.css';
+import { AmplifyProvider } from '@aws-amplify/ui-react';
 
-ReactDOM.render(
+try {
+  const awsconfig = require('./aws-exports').default;
+  Amplify.configure(awsconfig);
+} catch {
+  // aws-exports.js not found — running without Amplify backend
+  // Set REACT_APP_USE_MOCK_DATA=true to use mock data in development
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
     <AmplifyProvider>
       <App />
     </AmplifyProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

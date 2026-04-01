@@ -1,0 +1,6 @@
+build/
+coverage/
+node_modules/
+amplify/#current-cloud-backend
+amplify/backend/amplify-meta.json
+src/graphql/

@@ -1,6 +1,31 @@
-type Home @model @auth(rules: [{allow: public}]) {
+type Home @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  address: String
-  image_url: String
-  price: Float
+  address: String!
+  city: String
+  state: String
+  zipCode: String
+  price: Float!
+  bedrooms: Int
+  bathrooms: Int
+  squareFeet: Int
+  description: String
+  imageUrl: String
+  propertyType: PropertyType
+  listingStatus: ListingStatus
+  yearBuilt: Int
+}
+
+enum PropertyType {
+  SINGLE_FAMILY
+  CONDO
+  TOWNHOUSE
+  MULTI_FAMILY
+  LAND
+}
+
+enum ListingStatus {
+  ACTIVE
+  PENDING
+  SOLD
+  OFF_MARKET
 }
